@@ -1,0 +1,4 @@
+[2026-08-31 08:15:39] [kiosk cancel] cancel_ticket request received: branch=makati-city-hall raw_queue_id=582
+[2026-08-31 08:15:39] [kiosk cancel] called with queueId=582 pharmacyId=1
+[2026-08-31 08:15:39] [kiosk cancel] queues row 582 updated to Cancelled (rowCount=1).
+[2026-08-31 08:15:39] [kiosk cancel] SUCCESS: queue_status_log row written for queueId=582.

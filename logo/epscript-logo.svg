@@ -1,0 +1,40 @@
+<svg viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="epsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon: rounded document with folded corner + Rx mark -->
+  <g transform="translate(20,20)">
+    <path d="M0,16 
+             Q0,0 16,0 
+             L104,0 
+             L140,36 
+             L140,124 
+             Q140,140 124,140 
+             L16,140 
+             Q0,140 0,124 
+             Z" fill="url(#epsGrad)"/>
+    <!-- folded corner -->
+    <path d="M104,0 L140,36 L112,36 Q104,36 104,28 Z" fill="#ffffff" opacity="0.35"/>
+
+    <!-- Rx glyph -->
+    <text x="70" y="98" font-family="Georgia, 'Times New Roman', serif" font-size="66" 
+          font-weight="700" fill="#ffffff" text-anchor="middle">R<tspan font-size="46" dy="4">x</tspan></text>
+
+    <!-- pulse / electronic signal line under the mark -->
+    <path d="M14,124 L38,124 L48,108 L60,138 L72,116 L82,124 L126,124" 
+          stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(185,0)">
+    <text x="0" y="98" font-family="'Segoe UI', Arial, sans-serif" font-size="58" font-weight="700" fill="#0f172a">
+      Ep<tspan fill="#0891b2">script</tspan>
+    </text>
+    <text x="2" y="130" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="500" 
+          letter-spacing="2" fill="#64748b">ELECTRONIC PRESCRIPTION</text>
+  </g>
+</svg>

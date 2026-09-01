@@ -1,0 +1,89 @@
+/*
+ * ================= KIOSK COMMON (CSS) =================
+ * Shared hardening for any kiosk-style page in EPscript — a public
+ * touchscreen terminal, not a normal browsing page. Include this
+ * alongside page-specific styles rather than re-writing this per page.
+ *
+ * Usage: <link rel="stylesheet" href="../../includes/kiosk_common.css">
+ * Pair with kiosk_common.js for the fullscreen toggle button and
+ * context-menu blocking (CSS alone can't do those).
+ *
+ * Also add to the page's own <meta name="viewport"> tag:
+ *   width=device-width, initial-scale=1, maximum-scale=1,
+ *   user-scalable=no, viewport-fit=cover
+ * (viewport-fit=cover is required for the safe-area-inset-* variables
+ * below to report anything other than 0 on notched/rounded-corner
+ * tablets.)
+ */
+
+html, body {
+    height: 100%;
+    /* 100dvh accounts for mobile browsers whose toolbar shows/hides and
+       changes the usable viewport height; 100vh is the fallback for
+       browsers that don't support dvh yet. Declaring vh first and dvh
+       second means capable browsers use the better value while older
+       ones just keep the vh they already understood. */
+    min-height: 100vh;
+    min-height: 100dvh;
+    overscroll-behavior: none; /* no rubber-band bounce / pull-to-refresh */
+}
+
+html {
+    touch-action: manipulation; /* removes the ~300ms double-tap-to-zoom delay on touchscreens */
+}
+
+body {
+    -webkit-user-select: none;
+    user-select: none;               /* no accidental text-selection highlighting from a tap-drag */
+    -webkit-tap-highlight-color: transparent; /* no gray flash on tap */
+}
+
+img, i, .bi, svg {
+    -webkit-user-drag: none;
+    user-drag: none;                 /* no accidental image/icon drag-out on touch */
+    -webkit-touch-callout: none;     /* no iOS long-press "save image" callout */
+}
+
+/*
+ * Safe-area utility classes — apply to whatever sits at the physical
+ * edge of the screen (a header bar, a footer strip) so content isn't
+ * clipped by a notch, rounded corner, or a kiosk enclosure's bezel
+ * cutout on tablets that have one. No-ops (padding: 0) on screens
+ * without a safe-area inset, so safe to apply everywhere.
+ */
+.kiosk-safe-area-top    { padding-top: env(safe-area-inset-top, 0px); }
+.kiosk-safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.kiosk-safe-area-left   { padding-left: env(safe-area-inset-left, 0px); }
+.kiosk-safe-area-right  { padding-right: env(safe-area-inset-right, 0px); }
+
+/*
+ * Floating fullscreen toggle button, injected by kiosk_common.js.
+ * Deliberately neutral dark/translucent rather than using a page's own
+ * brand color variables (e.g. --brand-navy) — this file is shared
+ * across kiosk pages that may each have a different brand palette, or
+ * none defined at all.
+ */
+#kioskFullscreenToggle {
+    position: fixed;
+    top: max(0.75rem, env(safe-area-inset-top, 0px));
+    right: max(0.75rem, env(safe-area-inset-right, 0px));
+    z-index: 40; /* stays below modal overlays (e.g. z-index: 50 in kiosk.php) */
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(17, 24, 39, 0.35);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    transition: background .15s ease;
+}
+#kioskFullscreenToggle:hover,
+#kioskFullscreenToggle:active {
+    background: rgba(17, 24, 39, 0.55);
+}
+#kioskFullscreenToggle svg { pointer-events: none; }
